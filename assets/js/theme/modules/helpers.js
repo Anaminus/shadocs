@@ -244,7 +244,7 @@ export function manageClickCollapsibleSidebar() {
 export function manageDefaultCollapsibleSidebar() {
   if (!getTriggers().includes(sizeTriggerDesktop) || isManualCollapsedSidebar) {
     toggleSidebar(false);
-  } else {
+  } else if (document.getElementById('contentHome') === null) {
     toggleSidebar(true);
   };
 };
