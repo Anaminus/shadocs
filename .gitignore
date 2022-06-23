@@ -3,6 +3,7 @@
 /resources/_gen/
 exampleSite/public
 exampleSite/resources/_gen/
+.hugo_build.lock
 
 # Ignore npm files
 node_modules/
@@ -10,3 +11,6 @@ node_modules/
 # Cypress files to ignore
 /cypress/downloads/
 debug.log
+
+# Common files
+workflow.log
