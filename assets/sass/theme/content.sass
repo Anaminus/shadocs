@@ -11,6 +11,20 @@
   overflow-x: hidden
   overflow-y: auto
   flex: 1
+  &.has-toc
+    #content
+      +static-size-width(calc(100% - #{$toc-width} - #{$toc-collapsible-width}))
+    &.is-toc-collapsed
+      #content
+        +static-size-width(calc(100% - #{$toc-collapsible-width}))
+      #tocContainer
+        display: none
+      #tocCollapsible
+        i
+          transform: rotate(180deg)
+    +until-widescreen
+      #content
+        +static-size-width(calc(100% - #{$toc-collapsible-width}))
   #contentTitle
     margin-bottom: $theme-gap-large-size
     font-size: $theme-title-font-size
@@ -32,8 +46,6 @@
     +touch
       +static-size-width(100%)
     +desktop
-      +static-size-width(100%)
-    +widescreen
       +static-size-width(calc(100% - #{$toc-width}))
     &:after
       height: $theme-gap-large-size

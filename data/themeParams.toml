@@ -86,7 +86,8 @@
     "js/theme/qrcode.js",
     "js/theme/search.js",
     "js/theme/shortcuts.js",
-    "js/theme/sidebar.js"
+    "js/theme/sidebar.js",
+    "js/theme/toc.js"
   ]
   [includes.shortcodes.jsModules]
     collapsible = [
@@ -106,6 +107,10 @@
     openapi = [
       "js/external/swagger-ui-bundle.min.js",
       "js/external/swagger-ui-preset.min.js"
+    ]
+    asyncapi = [
+      "js/external/asyncapi-bundle.min.js",
+      "js/external/asyncapi-web-component.min.js"
     ]
   [includes.shortcodes.css]
     openapi = [
