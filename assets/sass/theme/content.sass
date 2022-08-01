@@ -42,11 +42,8 @@
     +tablet
       padding-right: $navbar-height
       padding-left: $navbar-height
+    +static-size-width(100%)
     position: relative
-    +touch
-      +static-size-width(100%)
-    +desktop
-      +static-size-width(calc(100% - #{$toc-width}))
     &:after
       height: $theme-gap-large-size
       position: absolute
