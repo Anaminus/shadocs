@@ -9,8 +9,8 @@
   const introPrevLabel = '{{i18n "intro_prevlabel"}}';
   const introSkipLabel = '{{i18n "intro_skiplabel"}}';
   const introDoneLabel = '{{i18n "intro_donelabel"}}';
-  const printLabel = '{{i18n "8_print_wording"}}';
-  const qrCodeLabel = '{{i18n "9_qrcode_wording"}}';
+  const printLabel = '{{i18n "9_print_wording"}}';
+  const qrCodeLabel = '{{i18n "10_qrcode_wording"}}';
   const naCommonLabel = '{{i18n "na_common"}}';
 </script>
 <!-- JS Modules includes -->
@@ -25,12 +25,12 @@
   {{range .}}{{$jsModulesFiles = $jsModulesFiles | append .}}{{end}}
 {{end}}
 {{range $key, $value := .Site.Data.themeParams.includes.shortcodes.jsModules}}
-  {{with len (findRE (printf "%s%s%s" "{{(<|%)[[:space:]]*?" $key "(.|\n|\r)*?(%|>)}}") $.Page.RawContent)}}
+  {{with $.Page.HasShortcode $key}}
     {{range $value}}{{$jsModulesFiles = $jsModulesFiles | append .}}{{end}}
   {{end}}
 {{end}}
 {{range $key, $value := .Site.Params.includes.shortcodes.jsModules}}
-  {{with len (findRE (printf "%s%s%s" "{{(<|%)[[:space:]]*?" $key "(.|\n|\r)*?(%|>)}}") $.Page.RawContent)}}
+  {{with $.Page.HasShortcode $key}}
     {{range $value}}{{$jsModulesFiles = $jsModulesFiles | append .}}{{end}}
   {{end}}
 {{end}}
@@ -59,12 +59,12 @@
   {{range .}}{{$jsFiles = $jsFiles | append .}}{{end}}
 {{end}}
 {{range $key, $value := .Site.Data.themeParams.includes.shortcodes.js}}
-  {{with len (findRE (printf "%s%s%s" "{{(<|%)[[:space:]]*?" $key "(.|\n|\r)*?(%|>)}}") $.Page.RawContent)}}
+  {{with $.Page.HasShortcode $key}}
     {{range $value}}{{$jsFiles = $jsFiles | append .}}{{end}}
   {{end}}
 {{end}}
 {{range $key, $value := .Site.Params.includes.shortcodes.js}}
-  {{with len (findRE (printf "%s%s%s" "{{(<|%)[[:space:]]*?" $key "(.|\n|\r)*?(%|>)}}") $.Page.RawContent)}}
+  {{with $.Page.HasShortcode $key}}
     {{range $value}}{{$jsFiles = $jsFiles | append .}}{{end}}
   {{end}}
 {{end}}
@@ -92,6 +92,6 @@
     {{else}}
       {{$scratch.Set "script" (resources.Get . | resources.ExecuteAsTemplate . $context | minify)}}
     {{end}}
-    <script type='{{$type}}' src='{{($scratch.Get "script").RelPermalink}}'></script>
+    <script type='{{$type}}' src='{{($scratch.Get "script").RelPermalink | safeURL}}'></script>
   {{end}}
 {{end}}

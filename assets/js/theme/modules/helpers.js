@@ -298,11 +298,27 @@ export function toggleSidebarEntries(force) {
     toggleSidebarEntry(iie[i], force);
   };
 };
-// Function to add a variable to the global scope
-export function addGlobalVariable(name, value) {
-  if (!window[name]) {
-    window[name] = value;
-  };
+// Function that manage the navbar menu
+export function manageNavbarMenu() {
+  const navbarExtendWidth = document.getElementById('navbarExtend').offsetWidth;
+  const navbarLogoWidth = document.getElementById('globalLogoContainer').offsetWidth;
+  const searchWidth = document.getElementById('searchContainer').offsetWidth;
+  const maxLength = document.body.clientWidth - navbarLogoWidth - searchWidth;
+  const navbarItems = document.getElementById('navbarItemsEnd').children
+  const navbarExtendItems = document.getElementById('navbarExtendItemsWrapper').children
+  let tempLength = navbarExtendWidth;
+  for (let i = 0; i < (navbarItems.length -1); i++) {
+    tempLength = tempLength + ((navbarItems[i].offsetWidth) ? (navbarItems[i].offsetWidth) : navbarExtendItems[i].offsetWidth)
+    if (tempLength > maxLength) {
+      navbarItems[i].classList.toggle('is-hidden', true);
+      navbarExtendItems[i].classList.toggle('is-hidden', false);
+    } else {
+      navbarItems[i].classList.toggle('is-hidden', false);
+      navbarExtendItems[i].classList.toggle('is-hidden', true);
+    }
+  }
+  document.getElementById('navbarExtend').classList.toggle('is-hidden', (maxLength >= tempLength));
+  document.getElementById('navbarItemsEnd').classList.toggle('is-invisible', false);
 }
 // Function returning a loading helper
 export function getLoadingHelper(wrapperClass, wrapperId) {
@@ -353,4 +369,5 @@ export function toggleToc(force) {
     force = document.getElementById('contentContainer').classList.contains('is-toc-collapsed');
   }
   document.getElementById('contentContainer').classList.toggle('is-toc-collapsed', !force);
+  document.getElementById('contentContainer').classList.toggle('is-toc-uncollapsed', force);
 };
